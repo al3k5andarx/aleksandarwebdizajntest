@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){try{var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];var r=n?n.type==='reload':(performance.navigation&&performance.navigation.type===1);if(sessionStorage.getItem('loadingShown')!=='true'||r){var p=decodeURIComponent(location.pathname.split('/').pop()||'index.html');if(!/\.html$/i.test(p))p='index.html';document.documentElement.style.background='#151210';location.replace('loader.html?to='+encodeURIComponent(p+location.hash));}}catch(e){}})();</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  html{scroll-behavior:smooth;}
+  ::selection{background-color:oklch(0.62 0.09 55);color:#151210;}
+  ::-moz-selection{background-color:oklch(0.62 0.09 55);color:#151210;}
+  body{margin:0;background:#151210;}
+  a{color:#f2ede6;}
+  a:hover{color:oklch(0.62 0.09 55);}
+</style>
+</helmet>
+<div style="background:#151210;min-height:100vh;font-family:'Sora',sans-serif;color:#f2ede6">
+
+  <header style="position:sticky;top:0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:16px clamp(20px,5vw,64px);background:rgba(21,18,16,0.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(242,237,230,0.08)">
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="index.html" onMouseEnter="{{ onLogoEnter }}" onMouseLeave="{{ onLogoLeave }}" style="{{ logoCircleStyle }}"></a>
+      <a href="index.html" onMouseEnter="{{ onLogoEnter }}" onMouseLeave="{{ onLogoLeave }}" style="{{ logoTextStyle }}"><span style="display:inline-flex;flex-direction:column;gap:3px;line-height:1"><span>ALEKSANDAR</span><span style="display:block;font-size:9px;font-weight:600;letter-spacing:0;text-align:justify;text-align-last:justify;color:oklch(0.62 0.09 55)">W E B  D I Z A J N</span></span></a>
+    </div>
+    <nav style="display:flex;align-items:center;gap:clamp(14px,2.5vw,32px);flex-wrap:wrap;justify-self:center">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="5">
+        <a href="{{ item.href }}" onClick="{{ item.onClick }}" style="{{ item.style }}" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:2px;padding:3px;border:1px solid rgba(242,237,230,0.16);border-radius:999px;justify-self:end">
+      <button onClick="{{ toSr }}" style="{{ srBtnStyle }}" style-hover="background:var(--lh,rgba(242,237,230,0.08))">SR</button>
+      <button onClick="{{ toEn }}" style="{{ enBtnStyle }}" style-hover="background:var(--lh,rgba(242,237,230,0.08))">EN</button>
+    </div>
+  </header>
+
+  <section style="padding:clamp(40px,6vw,72px) clamp(20px,5vw,64px) clamp(48px,8vw,96px);max-width:1280px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:48px;align-items:center">
+      <div>
+        <span style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(242,237,230,0.2);border-radius:999px;font-size:13px;color:#a89f93;margin-bottom:24px">
+          <span style="width:7px;height:7px;border-radius:50%;background:oklch(0.62 0.09 55);display:inline-block"></span>{{ t.hero_badge }}
+        </span>
+        <h1 style="font-size:clamp(36px,5.2vw,60px);line-height:1.08;font-weight:700;letter-spacing:-0.01em;margin:0 0 24px">{{ t.hero_title }}</h1>
+        <p style="font-size:16px;line-height:1.7;color:#a89f93;max-width:48ch;margin:0 0 36px">{{ t.hero_sub }}</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a href="#work" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:oklch(0.62 0.09 55);color:#151210;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:0.02em;border-radius:999px;transition:background 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease" style-hover="background:oklch(0.68 0.09 55);transform:translateY(-2px);box-shadow:0 8px 22px -8px oklch(0.62 0.09 55 / 0.55)">{{ t.hero_cta }} →</a>
+          <a href="kontakt.html" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border:1px solid rgba(242,237,230,0.22);color:#f2ede6;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:0.02em;border-radius:999px;transition:background 0.2s ease,border-color 0.2s ease,color 0.2s ease" style-hover="background:oklch(0.62 0.09 55 / 0.12);border-color:oklch(0.62 0.09 55)">{{ t.hero_cta2 }}</a>
+        </div>
+      </div>
+      <div style="position:relative;display:flex;align-items:center;justify-content:center;min-height:320px">
+        <div style="position:absolute;width:80%;aspect-ratio:1;background:radial-gradient(circle, oklch(0.62 0.09 55 / 0.22) 0%, transparent 72%);border-radius:50%"></div>
+        <span style="position:relative;width:min(280px,70%);aspect-ratio:1;border-radius:50%;background:#221d18;border:1px solid rgba(242,237,230,0.14);display:flex;align-items:center;justify-content:center">
+          <svg width="42%" height="42%" viewBox="0 0 24 24" fill="none" stroke="#5a5550" stroke-width="1.3"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"></path></svg>
+        </span>
+        <span style="position:absolute;top:10%;right:0%;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid rgba(242,237,230,0.2);border-radius:999px;font-size:12px;background:#151210">{{ t.hero_float1 }}</span>
+        <span style="position:absolute;bottom:12%;left:2%;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid rgba(242,237,230,0.2);border-radius:999px;font-size:12px;background:#151210">{{ t.hero_float2 }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#1a1613;border-top:1px solid rgba(242,237,230,0.08);border-bottom:1px solid rgba(242,237,230,0.08)">
+    <div style="max-width:1280px;margin:0 auto;padding:24px clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;row-gap:14px">
+      <span style="font-size:14px;font-weight:600;color:#f2ede6">{{ t.strip1 }}</span>
+      <span style="color:oklch(0.62 0.09 55);display:inline-flex;align-items:center;line-height:1">✦</span>
+      <span style="font-size:14px;font-weight:600;color:#f2ede6">{{ t.strip2 }}</span>
+      <span style="color:oklch(0.62 0.09 55);display:inline-flex;align-items:center;line-height:1">✦</span>
+      <span style="font-size:14px;font-weight:600;color:#f2ede6">{{ t.strip3 }}</span>
+      <span style="color:oklch(0.62 0.09 55);display:inline-flex;align-items:center;line-height:1">✦</span>
+      <span style="font-size:14px;font-weight:600;color:#f2ede6">{{ t.strip4 }}</span>
+    </div>
+  </section>
+
+  <section id="about" style="scroll-margin-top:90px;padding:clamp(56px,9vw,100px) clamp(20px,5vw,64px);max-width:1280px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:48px;align-items:center">
+      <span style="width:100%;max-width:260px;aspect-ratio:1;border-radius:50%;background:#221d18;border:1px solid rgba(242,237,230,0.14);display:flex;align-items:center;justify-content:center;justify-self:center;align-self:center">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#5a5550" stroke-width="1.2"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"></path></svg>
+      </span>
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+          <span style="color:oklch(0.62 0.09 55);font-size:12px">◆</span>
+          <span style="font-family:'Courier New',monospace;font-size:12px;letter-spacing:0.12em;color:oklch(0.62 0.09 55);text-transform:uppercase">{{ t.about_brief_label }}</span>
+        </div>
+        <h2 style="font-family:'Sora',sans-serif;font-size:clamp(24px,3.2vw,32px);font-weight:700;margin:0 0 16px">{{ t.about_brief_title }}</h2>
+        <p style="font-size:15px;line-height:1.7;color:#a89f93;max-width:50ch;margin:0 0 32px;white-space:pre-line">{{ t.about_brief_body }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:32px">
+          <div><div style="font-size:30px;font-weight:800;color:oklch(0.62 0.09 55)">{{ t.stat1_num }}</div><div style="font-size:13px;color:#a89f93">{{ t.stat1_label }}</div></div>
+          <div><div style="font-size:30px;font-weight:800;color:oklch(0.62 0.09 55)">{{ t.stat2_num }}</div><div style="font-size:13px;color:#a89f93">{{ t.stat2_label }}</div></div>
+          <div><div style="font-size:30px;font-weight:800;color:oklch(0.62 0.09 55)">{{ t.stat3_num }}</div><div style="font-size:13px;color:#a89f93">{{ t.stat3_label }}</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid rgba(242,237,230,0.08)">
+    <div style="padding:clamp(48px,8vw,96px) clamp(20px,5vw,64px);max-width:1280px;margin:0 auto">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px">
+        <div style="max-width:52ch">
+          <h2 style="font-family:'Sora',sans-serif;font-size:clamp(26px,3.4vw,36px);font-weight:700;margin:0 0 16px">{{ t.why_title }}</h2>
+          <p style="font-size:16px;line-height:1.7;color:#a89f93;margin:0">{{ t.why_sub }}</p>
+        </div>
+        <a href="kontakt.html" style="flex-shrink:0;display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border:1px solid oklch(0.62 0.09 55);color:oklch(0.62 0.09 55);text-decoration:none;font-weight:600;font-size:14px;border-radius:999px;transition:background 0.2s ease,border-color 0.2s ease,color 0.2s ease" style-hover="background:oklch(0.62 0.09 55 / 0.12);border-color:oklch(0.62 0.09 55)">{{ t.why_cta }}</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:20px">
+        <div style="background:oklch(0.62 0.09 55);border:1px solid oklch(0.62 0.09 55);border-radius:12px;padding:28px;transition:transform 0.2s ease,box-shadow 0.2s ease" style-hover="transform:translateY(-4px);box-shadow:0 0 20px oklch(0.62 0.09 55 / 0.25)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#151210" stroke-width="1.6"><path d="M4 5h16l-6 8v6l-4-2v-4z"></path></svg>
+          <div style="font-size:17px;font-weight:700;margin:18px 0 10px;color:#151210">{{ t.why_card1_title }}</div>
+          <p style="font-size:14px;line-height:1.6;color:#151210;opacity:0.75;margin:0">{{ t.why_card1_desc }}</p>
+        </div>
+        <div style="background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;padding:28px;transition:transform 0.25s ease,border-color 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-4px);border-color:oklch(0.62 0.09 55 / 0.7);box-shadow:0 14px 32px -14px rgba(0,0,0,0.7)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="oklch(0.62 0.09 55)" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          <div style="font-size:17px;font-weight:700;margin:18px 0 10px">{{ t.why_card2_title }}</div>
+          <p style="font-size:14px;line-height:1.6;color:#a89f93;margin:0">{{ t.why_card2_desc }}</p>
+        </div>
+        <div style="background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;padding:28px;transition:transform 0.25s ease,border-color 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-4px);border-color:oklch(0.62 0.09 55 / 0.7);box-shadow:0 14px 32px -14px rgba(0,0,0,0.7)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="oklch(0.62 0.09 55)" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1" fill="oklch(0.62 0.09 55)"></circle></svg>
+          <div style="font-size:17px;font-weight:700;margin:18px 0 10px">{{ t.why_card3_title }}</div>
+          <p style="font-size:14px;line-height:1.6;color:#a89f93;margin:0">{{ t.why_card3_desc }}</p>
+        </div>
+        <div style="background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;padding:28px;transition:transform 0.25s ease,border-color 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-4px);border-color:oklch(0.62 0.09 55 / 0.7);box-shadow:0 14px 32px -14px rgba(0,0,0,0.7)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="oklch(0.62 0.09 55)" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg>
+          <div style="font-size:17px;font-weight:700;margin:18px 0 10px">{{ t.why_card4_title }}</div>
+          <p style="font-size:14px;line-height:1.6;color:#a89f93;margin:0">{{ t.why_card4_desc }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" style="padding:clamp(48px,8vw,96px) clamp(20px,5vw,64px);max-width:1280px;margin:0 auto;border-top:1px solid rgba(242,237,230,0.08)">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+      <span style="color:oklch(0.62 0.09 55);font-size:12px">◆</span>
+      <span style="font-family:'Courier New',monospace;font-size:12px;letter-spacing:0.12em;color:oklch(0.62 0.09 55);text-transform:uppercase">{{ t.work_eyebrow }}</span>
+    </div>
+    <h2 style="font-size:clamp(28px,3.6vw,40px);font-weight:700;margin:0 0 32px">{{ t.work_title }}</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+        <button onClick="{{ f.onClick }}" style="{{ f.style }}" style-hover="background:var(--hb,rgba(242,237,230,0.06));border-color:oklch(0.62 0.09 55)">{{ f.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:24px">
+      <sc-for list="{{ visibleFeatured }}" as="item" hint-placeholder-count="3">
+        <div onClick="{{ item.onCardClick }}" style="text-decoration:none;color:#f2ede6;display:flex;flex-direction:column;border:1px solid rgba(242,237,230,0.1);border-radius:16px;overflow:hidden;background:#1a1613;cursor:pointer;transition:transform 0.25s ease,border-color 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-4px);border-color:oklch(0.62 0.09 55 / 0.7);box-shadow:0 14px 32px -14px rgba(0,0,0,0.7)">
+          <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(242,237,230,0.08)">
+            <span style="display:flex;gap:5px">
+              <span style="width:8px;height:8px;border-radius:50%;background:#e05c4f"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#e0b34f"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#5cbf6a"></span>
+            </span>
+            <sc-if value="{{ item.isSite }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ item.siteUrl }}" target="_blank" rel="noopener" onClick="{{ stopProp }}" style="font-size:12px;color:#a89f93;text-decoration:none;padding:3px 10px;border:1px solid rgba(242,237,230,0.12);border-radius:999px;transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease" style-hover="transform:scale(1.06);border-color:oklch(0.62 0.09 55);box-shadow:0 0 14px oklch(0.62 0.09 55 / 0.2)">{{ item.domain }}</a>
+            </sc-if>
+            <sc-if value="{{ !item.isSite }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:12px;color:#a89f93;padding:3px 10px;border:1px solid rgba(242,237,230,0.12);border-radius:999px">{{ item.domain }}</span>
+            </sc-if>
+          </div>
+          <sc-if value="{{ item.hasImage }}" hint-placeholder-val="{{ false }}"><div style="position:relative;flex-shrink:0">
+            <div role="img" aria-label="{{ item.title }}" style="{{ item.imageStyle }}"></div>
+            <span style="position:absolute;top:14px;left:16px;display:inline-block;font-size:12px;font-weight:600;padding:7px 14px;border:1px solid rgba(242,237,230,0.22);border-radius:999px;background:rgba(21,18,16,0.75);backdrop-filter:blur(6px)">{{ item.pill }}</span>
+          </div></sc-if>
+          <sc-if value="{{ item.noImage }}" hint-placeholder-val="{{ true }}"><div style="padding:20px 16px 0">
+            <span style="display:inline-block;font-size:12px;font-weight:600;padding:7px 14px;border:1px solid rgba(242,237,230,0.16);border-radius:999px">{{ item.pill }}</span>
+          </div><div style="height:160px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:16px">
+            <span style="font-size:11px;letter-spacing:0.1em;color:#6b6459;text-transform:uppercase;text-align:center">{{ item.label }}</span>
+          </div></sc-if>
+          <div style="display:flex;flex-direction:column;flex:1;padding:20px;border-top:1px solid rgba(242,237,230,0.08)">
+            <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.06em;color:oklch(0.62 0.09 55);text-transform:uppercase;margin-bottom:10px">{{ item.meta }}</div>
+            <div style="font-size:18px;font-weight:700;margin-bottom:10px">{{ item.title }}</div>
+            <p style="font-size:14px;line-height:1.6;color:#a89f93;margin:0 0 18px;flex:1">{{ item.desc }}</p>
+            <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:11px 18px;border:1px solid rgba(242,237,230,0.2);border-radius:999px;transition:background 0.2s ease,border-color 0.2s ease,color 0.2s ease" style-hover="background:oklch(0.62 0.09 55);border-color:oklch(0.62 0.09 55);color:#151210">{{ item.linkLabel }} ↗</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:40px">
+      <sc-if value="{{ false }}" hint-placeholder-val="{{ false }}"><a href="#" style="display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border:1px solid rgba(242,237,230,0.2);color:#f2ede6;text-decoration:none;font-weight:600;font-size:14px;border-radius:999px;transition:background 0.2s ease,border-color 0.2s ease,color 0.2s ease" style-hover="background:oklch(0.62 0.09 55 / 0.12);border-color:oklch(0.62 0.09 55)">{{ t.nav_video }}</a></sc-if>
+      <a href="webdizajn.html" style="display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border:1px solid rgba(242,237,230,0.2);color:#f2ede6;text-decoration:none;font-weight:600;font-size:14px;border-radius:999px;transition:background 0.2s ease,border-color 0.2s ease,color 0.2s ease" style-hover="background:oklch(0.62 0.09 55 / 0.12);border-color:oklch(0.62 0.09 55)">{{ t.see_all }}</a>
+    </div>
+  </section>
+
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,9vw,96px) clamp(20px,5vw,64px);max-width:1100px;margin:0 auto;border-top:1px solid rgba(242,237,230,0.08)">
+    <div style="text-align:center;margin-bottom:64px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px">
+        <span style="color:oklch(0.62 0.09 55);font-size:12px">◆</span>
+        <span style="font-family:'Courier New',monospace;font-size:12px;letter-spacing:0.12em;color:oklch(0.62 0.09 55);text-transform:uppercase">{{ t.process_eyebrow }}</span>
+      </div>
+      <h2 style="font-family:'Sora',sans-serif;font-size:clamp(26px,3.4vw,36px);font-weight:700;margin:0 0 14px">{{ t.process_title }}</h2>
+      <p style="font-size:16px;color:#a89f93;margin:0">{{ t.process_sub }}</p>
+    </div>
+
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:radial-gradient(circle, rgba(242,237,230,0.14) 1px, transparent 1px);background-size:28px 28px"></div>
+    <div style="position:absolute;top:5%;left:8%;width:420px;height:420px;z-index:0;pointer-events:none;background:radial-gradient(circle, oklch(0.62 0.09 55 / 0.12) 0%, transparent 70%)"></div>
+    <div style="position:absolute;bottom:8%;right:6%;width:380px;height:380px;z-index:0;pointer-events:none;background:radial-gradient(circle, oklch(0.62 0.09 55 / 0.1) 0%, transparent 70%)"></div>
+
+    <div style="display:flex;flex-direction:column;gap:56px;position:relative;z-index:1">
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:40px">
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="font-size:56px;font-weight:800;color:oklch(0.62 0.09 55 / 0.35);line-height:1;margin-bottom:8px">01</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+            <span style="width:38px;height:38px;flex-shrink:0;border-radius:50%;border:1px solid oklch(0.62 0.09 55);display:flex;align-items:center;justify-content:center;color:oklch(0.62 0.09 55)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h6"></path></svg>
+            </span>
+            <div style="font-size:19px;font-weight:700">{{ t.step1_title }}</div>
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#a89f93;margin:0 0 16px">{{ t.step1_desc }}</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step1_b1 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step1_b2 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step1_b3 }}</div>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="box-sizing:border-box;background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:40px 32px;transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease" style-hover="transform:scale(1.03);border-color:oklch(0.62 0.09 55);box-shadow:0 0 20px oklch(0.62 0.09 55 / 0.15)">
+            <div style="position:relative;width:100%;max-width:240px;border:1px solid rgba(242,237,230,0.14);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px">
+              <span style="position:absolute;top:-11px;left:16px;background:#1a1613;padding:0 8px;font-size:10px;letter-spacing:0.06em;color:oklch(0.62 0.09 55);border:1px solid oklch(0.62 0.09 55);border-radius:999px;text-transform:uppercase">{{ t.step1_badge }}</span>
+              <span style="position:absolute;top:14px;right:14px;width:16px;height:16px;border-radius:50%;border:1px solid rgba(242,237,230,0.25);display:flex;align-items:center;justify-content:center;font-size:9px;color:#a89f93">✓</span>
+              <div style="display:flex;flex-direction:column;gap:4px;margin-top:6px">
+                <span style="font-size:9px;letter-spacing:0.04em;color:#6b6459;text-transform:uppercase">{{ t.step1_f_name }}</span>
+                <div style="height:22px;border:1px solid rgba(242,237,230,0.16);border-radius:5px;display:flex;align-items:center;padding:0 8px"><span style="width:55%;height:5px;background:rgba(242,237,230,0.18);border-radius:2px"></span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:9px;letter-spacing:0.04em;color:#6b6459;text-transform:uppercase">{{ t.step1_f_email }}</span>
+                <div style="height:22px;border:1px solid rgba(242,237,230,0.16);border-radius:5px;display:flex;align-items:center;padding:0 8px"><span style="width:70%;height:5px;background:rgba(242,237,230,0.18);border-radius:2px"></span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:9px;letter-spacing:0.04em;color:#6b6459;text-transform:uppercase">{{ t.step1_f_type }}</span>
+                <div style="height:22px;border:1px solid rgba(242,237,230,0.16);border-radius:5px;display:flex;align-items:center;padding:0 8px"><span style="width:40%;height:5px;background:rgba(242,237,230,0.18);border-radius:2px"></span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:9px;letter-spacing:0.04em;color:#6b6459;text-transform:uppercase">{{ t.step1_f_message }}</span>
+                <div style="height:38px;border:1px solid rgba(242,237,230,0.16);border-radius:5px;padding:6px 8px;display:flex;flex-direction:column;gap:4px">
+                  <span style="width:85%;height:4px;background:rgba(242,237,230,0.15);border-radius:2px"></span>
+                  <span style="width:60%;height:4px;background:rgba(242,237,230,0.15);border-radius:2px"></span>
+                </div>
+              </div>
+              <div style="align-self:flex-end;margin-top:2px;width:88px;height:26px;background:oklch(0.62 0.09 55);border-radius:6px;display:flex;align-items:center;justify-content:center"><span style="width:44%;height:5px;background:#151210;border-radius:2px;opacity:0.7"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap-reverse;align-items:center;gap:40px">
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="box-sizing:border-box;background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:40px 32px;transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease" style-hover="transform:scale(1.03);border-color:oklch(0.62 0.09 55);box-shadow:0 0 20px oklch(0.62 0.09 55 / 0.15)">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:220px">
+              <div style="width:100%;border:1px solid rgba(242,237,230,0.14);border-radius:10px;padding:14px;display:flex;align-items:center;gap:10px">
+                <span style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(242,237,230,0.3);flex-shrink:0"></span>
+                <div style="display:flex;flex-direction:column;gap:5px;flex:1">
+                  <span style="width:60%;height:6px;background:rgba(242,237,230,0.2);border-radius:2px"></span>
+                  <span style="width:40%;height:5px;background:oklch(0.62 0.09 55 / 0.6);border-radius:2px"></span>
+                </div>
+                <span style="font-size:10px;color:#6b6459;font-family:'Courier New',monospace">12:34</span>
+              </div>
+              <div style="width:1px;height:14px;border-left:1px dashed rgba(242,237,230,0.25)"></div>
+              <div style="width:100%;border:1px solid rgba(242,237,230,0.14);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <span style="font-size:9px;letter-spacing:0.04em;color:#6b6459;text-transform:uppercase">{{ t.step2_quote_label }}</span>
+                  <span style="font-size:9px;letter-spacing:0.04em;color:oklch(0.62 0.09 55);border:1px solid oklch(0.62 0.09 55);border-radius:999px;padding:2px 8px;text-transform:uppercase">{{ t.step2_sent }}</span>
+                </div>
+                <span style="width:80%;height:5px;background:rgba(242,237,230,0.15);border-radius:2px"></span>
+                <span style="width:55%;height:5px;background:rgba(242,237,230,0.15);border-radius:2px"></span>
+                <span style="width:65%;height:5px;background:rgba(242,237,230,0.15);border-radius:2px"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="font-size:56px;font-weight:800;color:oklch(0.62 0.09 55 / 0.35);line-height:1;margin-bottom:8px">02</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+            <span style="width:38px;height:38px;flex-shrink:0;border-radius:50%;border:1px solid oklch(0.62 0.09 55);display:flex;align-items:center;justify-content:center;color:oklch(0.62 0.09 55)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+            </span>
+            <div style="font-size:19px;font-weight:700">{{ t.step2_title }}</div>
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#a89f93;margin:0 0 16px">{{ t.step2_desc }}</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step2_b1 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step2_b2 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step2_b3 }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:40px">
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="font-size:56px;font-weight:800;color:oklch(0.62 0.09 55 / 0.35);line-height:1;margin-bottom:8px">03</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+            <span style="width:38px;height:38px;flex-shrink:0;border-radius:50%;border:1px solid oklch(0.62 0.09 55);display:flex;align-items:center;justify-content:center;color:oklch(0.62 0.09 55)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1"></rect><path d="M8 20h8M12 16v4"></path></svg>
+            </span>
+            <div style="font-size:19px;font-weight:700">{{ t.step3_title }}</div>
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#a89f93;margin:0 0 16px">{{ t.step3_desc }}</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step3_b1 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step3_b2 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step3_b3 }}</div>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="box-sizing:border-box;background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;padding:40px 32px;transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease" style-hover="transform:scale(1.03);border-color:oklch(0.62 0.09 55);box-shadow:0 0 20px oklch(0.62 0.09 55 / 0.15)">
+            <div style="width:100%;max-width:300px;border:1px solid rgba(242,237,230,0.16);border-radius:8px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:4px;padding:6px 8px;border-bottom:1px solid rgba(242,237,230,0.14)">
+                <span style="width:5px;height:5px;border-radius:50%;background:rgba(242,237,230,0.3)"></span>
+                <span style="width:5px;height:5px;border-radius:50%;background:rgba(242,237,230,0.3)"></span>
+                <span style="width:5px;height:5px;border-radius:50%;background:rgba(242,237,230,0.3)"></span>
+              </div>
+              <div style="padding:10px;display:flex;flex-direction:column;gap:6px">
+                <div style="height:10px;width:50%;border:1px solid rgba(242,237,230,0.18);border-radius:3px"></div>
+                <div style="display:flex;gap:6px">
+                  <div style="flex:2;height:20px;border:1px solid rgba(242,237,230,0.14);border-radius:3px"></div>
+                  <div style="flex:1;height:20px;border:1px solid oklch(0.62 0.09 55 / 0.6);border-radius:3px"></div>
+                </div>
+              </div>
+            </div>
+            <div style="width:100%;max-width:300px;height:1px;background:rgba(242,237,230,0.1)"></div>
+            <div style="width:100%;max-width:300px;display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:6px">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="oklch(0.62 0.09 55)" stroke="none"><path d="M6 4l14 8-14 8z"></path></svg>
+                <div style="flex:1;display:flex;gap:3px;height:12px">
+                  <div style="width:22%;background:oklch(0.62 0.09 55 / 0.55);border-radius:2px"></div>
+                  <div style="width:14%;background:rgba(242,237,230,0.16);border-radius:2px"></div>
+                  <div style="width:30%;background:oklch(0.62 0.09 55 / 0.3);border-radius:2px"></div>
+                  <div style="width:18%;background:rgba(242,237,230,0.16);border-radius:2px"></div>
+                </div>
+              </div>
+              <svg width="100%" height="14" viewBox="0 0 100 14" preserveAspectRatio="none"><polyline points="0,7 6,3 12,10 18,4 24,9 30,2 36,11 42,5 48,8 54,3 60,10 66,6 72,9 78,4 84,8 90,5 96,9 100,7" fill="none" stroke="rgba(242,237,230,0.3)" stroke-width="1"></polyline></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap-reverse;align-items:center;gap:40px">
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="box-sizing:border-box;background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:40px 32px;gap:14px;transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease" style-hover="transform:scale(1.03);border-color:oklch(0.62 0.09 55);box-shadow:0 0 20px oklch(0.62 0.09 55 / 0.15)">
+            <div style="position:relative;flex:1;max-width:180px;aspect-ratio:4/3;border:1px solid rgba(242,237,230,0.16);border-radius:8px;padding:12px">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="height:8px;width:70%;border:1px solid rgba(242,237,230,0.14);border-radius:2px"></div>
+                <div style="height:8px;width:50%;border:1px solid rgba(242,237,230,0.14);border-radius:2px"></div>
+                <div style="height:24px;width:100%;border:1px solid rgba(242,237,230,0.14);border-radius:3px;margin-top:4px"></div>
+              </div>
+              <span style="position:absolute;top:8px;right:10px;width:16px;height:16px;border-radius:50%;background:oklch(0.62 0.09 55);color:#151210;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span>
+              <span style="position:absolute;bottom:14px;left:16px;width:16px;height:16px;border-radius:50%;background:oklch(0.62 0.09 55);color:#151210;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">2</span>
+              <span style="position:absolute;bottom:-8px;right:-8px;width:16px;height:16px;border-radius:50%;border:1px solid rgba(242,237,230,0.35);color:#a89f93;font-size:9px;display:flex;align-items:center;justify-content:center">✓</span>
+            </div>
+            <div style="flex-shrink:0;width:1px;height:60%;border-left:1px dashed rgba(242,237,230,0.2)"></div>
+            <div style="flex:1;max-width:110px;border:1px solid rgba(242,237,230,0.16);border-radius:8px;border-top-left-radius:2px;padding:12px;display:flex;flex-direction:column;gap:6px">
+              <span style="width:80%;height:5px;background:rgba(242,237,230,0.16);border-radius:2px"></span>
+              <span style="width:60%;height:5px;background:rgba(242,237,230,0.16);border-radius:2px"></span>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="font-size:56px;font-weight:800;color:oklch(0.62 0.09 55 / 0.35);line-height:1;margin-bottom:8px">04</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+            <span style="width:38px;height:38px;flex-shrink:0;border-radius:50%;border:1px solid oklch(0.62 0.09 55);display:flex;align-items:center;justify-content:center;color:oklch(0.62 0.09 55)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 3v5h-5"></path></svg>
+            </span>
+            <div style="font-size:19px;font-weight:700">{{ t.step4_title }}</div>
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#a89f93;margin:0 0 16px">{{ t.step4_desc }}</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step4_b1 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step4_b2 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step4_b3 }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:40px">
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="font-size:56px;font-weight:800;color:oklch(0.62 0.09 55 / 0.35);line-height:1;margin-bottom:8px">05</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+            <span style="width:38px;height:38px;flex-shrink:0;border-radius:50%;border:1px solid oklch(0.62 0.09 55);display:flex;align-items:center;justify-content:center;color:oklch(0.62 0.09 55)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+            </span>
+            <div style="font-size:19px;font-weight:700">{{ t.step5_title }}</div>
+          </div>
+          <p style="font-size:14px;line-height:1.65;color:#a89f93;margin:0 0 16px">{{ t.step5_desc }}</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step5_b1 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step5_b2 }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#c9c2b8"><span style="color:oklch(0.62 0.09 55)">✓</span>{{ t.step5_b3 }}</div>
+          </div>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px">
+          <div style="box-sizing:border-box;background:#1a1613;border:1px solid rgba(242,237,230,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:40px 32px;transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease" style-hover="transform:scale(1.03);border-color:oklch(0.62 0.09 55);box-shadow:0 0 20px oklch(0.62 0.09 55 / 0.15)">
+            <div style="width:100%;max-width:260px;border:1px solid rgba(242,237,230,0.16);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;position:relative">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:9px;letter-spacing:0.04em;color:#6b6459;text-transform:uppercase">{{ t.step5_files_label }}</span>
+                <span style="font-size:9px;letter-spacing:0.04em;color:oklch(0.62 0.09 55);border:1px solid oklch(0.62 0.09 55);border-radius:999px;padding:2px 8px;text-transform:uppercase">{{ t.step5_ready }}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(242,237,230,0.4)" stroke-width="1.6"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5"></path></svg>
+                <span style="flex:1;height:5px;background:rgba(242,237,230,0.16);border-radius:2px"></span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="oklch(0.62 0.09 55)" stroke-width="2"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(242,237,230,0.4)" stroke-width="1.6"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5"></path></svg>
+                <span style="flex:1;height:5px;background:rgba(242,237,230,0.16);border-radius:2px"></span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="oklch(0.62 0.09 55)" stroke-width="2"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(242,237,230,0.4)" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="1"></rect><path d="M3 7l3-4h5l2 4"></path></svg>
+                <span style="flex:1;height:5px;background:rgba(242,237,230,0.16);border-radius:2px"></span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="oklch(0.62 0.09 55)" stroke-width="2"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="oklch(0.62 0.09 55)" stroke-width="1.6" style="position:absolute;bottom:-10px;right:-10px"><path d="M12 4v13M6 12l6 6 6-6"></path></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,9vw,96px) clamp(20px,5vw,64px);text-align:center;border-top:1px solid rgba(242,237,230,0.08)">
+    <div style="position:absolute;top:50%;left:50%;width:600px;height:600px;transform:translate(-50%,-50%);background:radial-gradient(circle, oklch(0.62 0.09 55 / 0.14) 0%, transparent 70%);pointer-events:none"></div>
+    <div style="position:relative">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px">
+        <span style="width:7px;height:7px;border-radius:50%;background:oklch(0.62 0.09 55);display:inline-block"></span>
+        <span style="font-family:'Courier New',monospace;font-size:12px;letter-spacing:0.12em;color:oklch(0.62 0.09 55);text-transform:uppercase">{{ t.cta_eyebrow }}</span>
+      </div>
+      <h2 style="font-family:'Sora',sans-serif;font-size:clamp(26px,3.5vw,38px);font-weight:700;max-width:20ch;margin:0 auto 16px">{{ t.cta_title }}</h2>
+      <p style="font-size:16px;color:#a89f93;max-width:44ch;margin:0 auto 36px">{{ t.cta_sub }}</p>
+      <a href="kontakt.html" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:oklch(0.62 0.09 55);color:#151210;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:0.02em;border-radius:999px;box-shadow:0 0 0 0 oklch(0.62 0.09 55 / 0.4);transition:background 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease" style-hover="background:oklch(0.68 0.09 55);transform:translateY(-2px);box-shadow:0 8px 22px -8px oklch(0.62 0.09 55 / 0.55)">{{ t.cta_button }} →</a>
+    </div>
+  </section>
+
+  <footer style="padding:72px clamp(20px,5vw,64px) 0;border-top:1px solid rgba(242,237,230,0.08);background:#1c1815">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,max-content));justify-content:space-between;gap:40px;padding-bottom:56px">
+      <div>
+        <div style="font-weight:700;font-size:17px;letter-spacing:0.06em;margin-bottom:14px">ALEKSANDAR</div>
+        <p style="font-size:14px;color:#a89f93;line-height:1.6;margin:0 0 16px;max-width:30ch">{{ t.footer_tag }}</p>
+        <a href="https://www.instagram.com/aleksandar.webdizajn/" target="_blank" rel="noopener" aria-label="Instagram" style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(242,237,230,0.16);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#f2ede6;transition:background 0.2s ease,border-color 0.2s ease,color 0.2s ease" style-hover="background:oklch(0.62 0.09 55 / 0.14);border-color:oklch(0.62 0.09 55);color:oklch(0.62 0.09 55)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+        </a>
+      </div>
+      <div>
+        <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.1em;color:#5a5550;text-transform:uppercase;margin-bottom:18px">{{ t.footer_quicklinks }}</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="index.html" style="font-size:14px;color:#a89f93;text-decoration:none;padding-bottom:2px;display:inline-block;width:fit-content;align-self:flex-start;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size 0.25s ease,color 0.15s ease" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ t.nav_home }}</a>
+          <a href="#about" style="font-size:14px;color:#a89f93;text-decoration:none;padding-bottom:2px;display:inline-block;width:fit-content;align-self:flex-start;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size 0.25s ease,color 0.15s ease" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ t.nav_about }}</a>
+          <a role="link" aria-disabled="true" style="cursor:pointer;font-size:14px;color:#a89f93;text-decoration:none;padding-bottom:2px;display:inline-block;width:fit-content;align-self:flex-start;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size 0.25s ease,color 0.15s ease" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ t.nav_video }}</a>
+          <a href="webdizajn.html" style="font-size:14px;color:#a89f93;text-decoration:none;padding-bottom:2px;display:inline-block;width:fit-content;align-self:flex-start;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size 0.25s ease,color 0.15s ease" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ t.nav_web }}</a>
+          <a href="kontakt.html" style="font-size:14px;color:#a89f93;text-decoration:none;padding-bottom:2px;display:inline-block;width:fit-content;align-self:flex-start;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size 0.25s ease,color 0.15s ease" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ t.nav_contact }}</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.1em;color:#5a5550;text-transform:uppercase;margin-bottom:18px">{{ t.footer_contact }}</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="https://www.instagram.com/aleksandar.webdizajn/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;white-space:nowrap;color:#a89f93;text-decoration:none;padding:5px 6px;margin:-5px -6px;border-radius:6px;transition:color 0.2s ease,transform 0.2s ease,background 0.2s ease" style-hover="color:oklch(0.62 0.09 55);transform:translateX(4px);background:oklch(0.62 0.09 55 / 0.08)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"></circle></svg>
+            @aleksandar.webdizajn
+          </a>
+          <a href="mailto:aleksandar.webdizajn@gmail.com" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;white-space:nowrap;color:#a89f93;text-decoration:none;padding:5px 6px;margin:-5px -6px;border-radius:6px;transition:color 0.2s ease,transform 0.2s ease,background 0.2s ease" style-hover="color:oklch(0.62 0.09 55);transform:translateX(4px);background:oklch(0.62 0.09 55 / 0.08)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 6.5 12 13l9 -6.5"></path></svg>
+            aleksandar.webdizajn@gmail.com
+          </a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:0.1em;color:#5a5550;text-transform:uppercase;margin-bottom:18px">{{ t.footer_legal }}</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="politika-privatnosti.html" style="font-size:14px;color:#a89f93;text-decoration:none;padding-bottom:2px;display:inline-block;width:fit-content;align-self:flex-start;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size 0.25s ease,color 0.15s ease" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ t.footer_privacy }}</a>
+          <a href="uslovi-koriscenja.html" style="font-size:14px;color:#a89f93;text-decoration:none;padding-bottom:2px;display:inline-block;width:fit-content;align-self:flex-start;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size 0.25s ease,color 0.15s ease" style-hover="background-size:100% 1px;color:oklch(0.62 0.09 55)">{{ t.footer_terms }}</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1280px;margin:0 auto;padding:24px 0;border-top:1px solid rgba(242,237,230,0.08);text-align:center">
+      <span style="font-size:12px;color:#5a5550">{{ t.footer_copyright }}</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { lang: 'sr', filter: 'all', logoHover: false, activeNav: 'home' };
+
+  componentDidMount() {
+    this.onScroll = () => {
+      const aboutEl = document.getElementById('about');
+      if (!aboutEl) return;
+      const rect = aboutEl.getBoundingClientRect();
+      const next = (rect.top <= window.innerHeight * 0.4 && rect.bottom > window.innerHeight * 0.4) ? 'about' : (window.scrollY < window.innerHeight * 0.5 ? 'home' : '');
+      if (next !== this.state.activeNav) this.setState({ activeNav: next });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  toolsData = [
+    { mono: 'Fi', name: { sr: 'Figma', en: 'Figma' } },
+    { mono: 'Ae', name: { sr: 'After Effects', en: 'After Effects' } },
+    { mono: 'Pr', name: { sr: 'Premiere Pro', en: 'Premiere Pro' } }
+  ];
+
+  copy = {
+    sr: {
+      see_all: 'Pogledaj sve', nav_home: 'Početna', nav_video: 'Video Editing', nav_web: 'Web Dizajn', nav_about: 'O meni', nav_contact: 'Kontakt',
+      eyebrow: 'Video editing i web dizajn',
+      hero_title: 'Sadržaj koji se pamti. Sajtovi koji rade posao.',
+      hero_sub: 'Video koji zaustavlja skrol i sajtovi koji pretvaraju posete u upite. Radim online, gde god se klijent nalazi.',
+      hero_cta: 'Pogledaj radove', hero_cta2: 'Kontakt',
+      hero_visual_label: 'Placeholder za showreel',
+      hero_badge: 'Dostupan za projekte',
+      hero_float1: 'Video Editing', hero_float2: 'Web Dizajn',
+      strip1: 'Video Editing', strip2: 'Web Dizajn', strip3: 'Motion Graphics', strip4: 'Brend Identitet',
+      about_brief_label: 'O meni', about_brief_title: 'Ko sam ja?\n',
+      about_brief_body: 'Zovem se Aleksandar. Bavim se video editingom i web dizajnom.\n\nGodinu dana sam potpuno posvećen ovome: učim, radim, usavršavam se iz dana u dan. Svaki projekat tretiram kao da je najvažniji koji sam dosad radio, jer upravo takav pristup pravi razliku između osrednjeg i dobrog rezultata.\n\nNe uzimam svaki posao. Biram projekte gde mogu da dam sve od sebe i stojim iza finalnog rezultata -bez kompromisa.',
+      stat1_num: '100%', stat1_label: 'Posvećenost svakom projektu',
+      stat2_num: '24h', stat2_label: 'Odgovor na upit',
+      stat3_num: '1+', stat3_label: 'Godina iskustva',
+      about_title: 'O meni', body_greeting: 'Zdravo, ja sam Aleksandar.',
+      body_main: 'Bavim se video editingom i web dizajnom - pravim sadržaj koji ostaje upamćen i sajtove koji rade svoj posao. Ne uzimam svaki projekat; biram one gde mogu da dam rezultat kojim mogu da stojim iza svog imena.',
+      tools_title: 'Alati kojima radim', skills_title: 'Tehničke veštine',
+      skill1: 'Motion graphics', skill2: 'Video editing', skill3: 'Web dizajn',
+      available_title: 'Dostupan', available_sub: 'Freelance | Remote | Po ugovoru',
+      quote: 'Pravim sadržaj koji je jasan, čist i upečatljiv. Svaki projekat je prilika da ideja oživi vizuelno - i spreman sam da to uradim i za tvoj brend.',
+      about_title: 'Nekoliko rečenica o meni',
+      about_body: 'Fokus je isti i kod videa i kod sajta: jasna poruka, bez suvišnih elemenata. Ne uzimam svaki projekat - biram one gde mogu da uradim posao kako treba.',
+      about_link: 'Više o meni',
+      why_title: 'Zašto baš ja?',
+      why_sub: 'Svaki projekat prolazi kroz isti filter - jasna poruka, bez suvišnih elemenata. Ne radim sa svima, biram projekte gde mogu da dam rezultat.',
+      why_cta: 'Zatraži ponudu',
+      why_card1_title: 'Selektivan pristup',
+      why_card1_desc: 'Ne uzimam svaki projekat. Biram one gde mogu da uradim posao kako treba i dam rezultat koji stoji iza mog imena.',
+      why_card2_title: 'Jasna komunikacija',
+      why_card2_desc: 'Bez čekanja i nagađanja. Znaš tačno u kojoj je fazi tvoj projekat i kada stiže sledeći korak.',
+      why_card3_title: 'Fokus na rezultat',
+      why_card3_desc: 'Video koji zaustavlja skrol, sajt koji pretvara posete u upite. Estetika je sredstvo, ne cilj.',
+      why_card4_title: 'Rokovi se poštuju',
+      why_card4_desc: 'Dogovoren rok je dogovoren rok. Bez iznenađenja i beskonačnih čekanja na finalnu verziju.',
+      process_eyebrow: 'Proces', process_title: 'Kako izgleda saradnja',
+      process_sub: 'Isti pristup za svaki projekat, bilo da je u pitanju video ili sajt.',
+      step1_title: 'Upit i brief', step1_desc: 'Popuniš formu ili mi pišeš direktno - šta ti treba, za koga je i kakav je cilj.',
+      step1_b1: 'Odgovor u roku od 24h', step1_b2: 'Bez obaveze', step1_b3: 'Kratko i jasno',
+      step1_badge: 'Novi upit', step1_f_name: 'Ime', step1_f_email: 'Email', step1_f_type: 'Tip projekta', step1_f_message: 'Poruka',
+      step2_title: 'Poziv i plan', step2_desc: 'Kratak razgovor da razjasnimo detalje, obim posla i rok. Nakon toga stiže ponuda.',
+      step2_b1: 'Jasna ponuda', step2_b2: 'Definisan rok', step2_b3: 'Bez sitnih slova',
+      step2_quote_label: 'Ponuda', step2_sent: 'Poslato',
+      step3_title: 'Izrada', step3_desc: 'Radim na projektu - dizajn i kod za sajt, editovanje i post-produkcija za video - uz redovne update-e.',
+      step3_b1: 'Redovni update-i', step3_b2: 'Transparentan napredak', step3_b3: 'Poštovanje roka',
+      step4_title: 'Revizija', step4_desc: 'Dobijaš prvu verziju na uvid, šalješ feedback, radim korekcije dok ne budeš zadovoljan/na.',
+      step4_b1: 'Uključene korekcije', step4_b2: 'Tvoj feedback na prvom mestu', step4_b3: 'Bez žurbe u finalizaciji',
+      step5_title: 'Isporuka', step5_desc: 'Finalni fajlovi ili sajt su tvoji - za sajtove nudim podršku posle lansiranja, za video sve potrebne formate.',
+      step5_b1: 'Svi formati/fajlovi', step5_b2: 'Podrška posle isporuke', step5_b3: 'Spreman za upotrebu',
+      step5_files_label: 'Fajlovi', step5_ready: 'Spremno',
+      work_eyebrow: 'Portfolio', work_title: 'Izdvojeni radovi',
+      filter_all: 'Sve', filter_video: 'Video Editing', filter_web: 'Web Dizajn',
+      pill_video: 'Video', pill_web: 'Web projekat',
+      cta_title: 'Imaš projekat na umu?',
+      cta_eyebrow: 'Spreman za saradnju',
+      cta_sub: 'Odgovaram u roku od 24h. Prvi razgovor je besplatan i bez obaveza.',
+      cta_button: 'Pošalji upit',
+      footer_tag: 'Video editing i web dizajn za brendove kojima je stalo do detalja.',
+      footer_quicklinks: 'Brzi linkovi', footer_contact: 'Kontakt', footer_legal: 'Pravno',
+      footer_copyright: '© 2026 Aleksandar - Web Dizajn. Sva prava zadržana.',
+      footer_privacy: 'Politika privatnosti', footer_terms: 'Uslovi korišćenja',
+      footer_status: 'Dostupan za nove projekte'
+    },
+    en: {
+      see_all: 'View all', nav_home: 'Home', nav_video: 'Video Editing', nav_web: 'Web Design', nav_about: 'About', nav_contact: 'Contact',
+      eyebrow: 'Video editing and web design',
+      hero_title: 'Content that sticks. Websites that do the job.',
+      hero_sub: 'Video that stops the scroll and websites that turn visits into inquiries. I work online, wherever the client is.',
+      hero_cta: 'See the work', hero_cta2: 'Contact',
+      hero_visual_label: 'Showreel placeholder',
+      hero_badge: 'Available for projects',
+      hero_float1: 'Video Editing', hero_float2: 'Web Design',
+      strip1: 'Video Editing', strip2: 'Web Design', strip3: 'Motion Graphics', strip4: 'Brand Identity',
+      about_brief_label: 'About me', about_brief_title: 'The story behind Aleksandar',
+      about_brief_body: 'My name is Aleksandar. I work in video editing and web design.\n\nFor a year I\'ve been fully dedicated to this: learning, working and improving day by day. I treat every project as if it were the most important one I\'ve done so far, because that approach is what separates an average result from a good one.\n\nI don\'t take every job. I choose projects where I can give my best and stand behind the final result - no compromises.',
+      stat1_num: '100%', stat1_label: 'Dedication to every project',
+      stat2_num: '24h', stat2_label: 'Reply to inquiries',
+      stat3_num: '1+', stat3_label: 'Year of experience',
+      about_title: 'About me', body_greeting: 'Hi, I\'m Aleksandar.',
+      body_main: 'I work in video editing and web design - I make content that sticks and websites that do their job. I don\'t take every project; I pick the ones where I can deliver a result I can put my name behind.',
+      tools_title: 'Tools I work with', skills_title: 'Technical skills',
+      skill1: 'Motion graphics', skill2: 'Video editing', skill3: 'Web design',
+      available_title: 'Available', available_sub: 'Freelance | Remote | Contract',
+      quote: 'I make content that\'s clear, clean and memorable. Every project is a chance to bring an idea to life visually - and I\'m ready to do the same for your brand.',
+      about_title: 'A few sentences about me',
+      about_body: 'The focus is the same for video and for a website: a clear message, no clutter. I don\'t take every project - I pick the ones I can do right.',
+      about_link: 'More about me',
+      why_title: 'Why work with me?',
+      why_sub: 'Every project goes through the same filter - a clear message, no clutter. I don\'t work with everyone, I pick projects where I can deliver a result.',
+      why_cta: 'Request a quote',
+      why_card1_title: 'A selective approach',
+      why_card1_desc: 'I don\'t take every project. I pick the ones I can do right and stand behind.',
+      why_card2_title: 'Clear communication',
+      why_card2_desc: 'No waiting around, no guessing. You know exactly what stage your project is at and when the next step arrives.',
+      why_card3_title: 'Focus on results',
+      why_card3_desc: 'Video that stops the scroll, a site that turns visits into inquiries. Looks are a means, not the goal.',
+      why_card4_title: 'Deadlines are kept',
+      why_card4_desc: 'An agreed deadline is an agreed deadline. No surprises, no endless waiting on a final version.',
+      process_eyebrow: 'Process', process_title: 'How working together looks',
+      process_sub: 'The same approach for every project, whether it\'s video or a website.',
+      step1_title: 'Inquiry and brief', step1_desc: 'You fill out the form or message me directly - what you need, who it\'s for, and the goal.',
+      step1_b1: 'Reply within 24h', step1_b2: 'No obligation', step1_b3: 'Short and clear',
+      step1_badge: 'New inquiry', step1_f_name: 'Name', step1_f_email: 'Email', step1_f_type: 'Project type', step1_f_message: 'Message',
+      step2_title: 'Call and plan', step2_desc: 'A short call to clarify the details, scope, and deadline. A quote follows after that.',
+      step2_b1: 'Clear quote', step2_b2: 'Set deadline', step2_b3: 'No fine print',
+      step2_quote_label: 'Quote', step2_sent: 'Sent',
+      step3_title: 'Production', step3_desc: 'I work on the project - design and code for a site, editing and post-production for video - with regular updates.',
+      step3_b1: 'Regular updates', step3_b2: 'Transparent progress', step3_b3: 'Deadline kept',
+      step4_title: 'Revision', step4_desc: 'You get the first version to review, send feedback, and I make revisions until you\'re happy with it.',
+      step4_b1: 'Revisions included', step4_b2: 'Your feedback comes first', step4_b3: 'No rush to finalize',
+      step5_title: 'Delivery', step5_desc: 'The final files or site are yours - I offer post-launch support for sites, and every format you need for video.',
+      step5_b1: 'All formats/files', step5_b2: 'Post-delivery support', step5_b3: 'Ready to use',
+      step5_files_label: 'Files', step5_ready: 'Ready',
+      work_eyebrow: 'Portfolio', work_title: 'Featured work',
+      filter_all: 'All', filter_video: 'Video Editing', filter_web: 'Web Design',
+      pill_video: 'Video', pill_web: 'Web project',
+      cta_title: 'Got a project in mind?',
+      cta_eyebrow: 'Ready to collaborate',
+      cta_sub: 'I reply within 24h. The first conversation is free, no strings attached.',
+      cta_button: 'Send an inquiry',
+      footer_tag: 'Video editing and web design for brands that care about the details.',
+      footer_quicklinks: 'Quick Links', footer_contact: 'Contact', footer_legal: 'Legal',
+      footer_copyright: '© 2026 Aleksandar - Web Design. All rights reserved.',
+      footer_privacy: 'Privacy Policy', footer_terms: 'Terms of Service',
+      footer_status: 'Available for new projects'
+    }
+  };
+
+  featured = [
+    { cat: 'web', href: 'webdizajn.html', domain: 'vilakatarina.rs', image: 'assets/vila-katarina.png', label: 'SNIMAK EKRANA: POČETNA STRANA VINARIJE',
+      meta: { sr: 'IZRADA SAJTA · 2026', en: 'WEBSITE BUILD · 2026' }, title: { sr: 'Vila Katarina', en: 'Vila Katarina' },
+      desc: { sr: 'Topao, planinski sajt za vilu na Zlatiboru, od prvog utiska do upita za rezervaciju, sa kalendarom i obračunom cene u realnom vremenu.', en: 'A warm, mountain-style website for a villa on Zlatibor, from the first impression to the booking inquiry, with a calendar and real-time price calculation.' } },
+    { cat: 'video', href: '#', domain: 'kalibarfitnes.rs', label: 'PLACEHOLDER ZA VIDEO - FITNES STUDIO',
+      meta: { sr: 'REEL KAMPANJA · 2025', en: 'REEL CAMPAIGN · 2025' }, title: { sr: 'Kalibar fitnes', en: 'Kalibar fitnes' },
+      desc: { sr: 'Teretana u Novom Sadu, stari sadržaj nije imao jasan stil. Serija reel objava za najave časova i transformacije.', en: 'A gym in Novi Sad with no clear content style before. A reel series for class promos and transformations.' } },
+    { cat: 'web', href: 'webdizajn.html', domain: 'nsgloss.rs', image: 'assets/ns-gloss.png', label: 'PRIKAZ LOGOTIPA I VIZIT KARTI',
+      meta: { sr: 'IZRADA SAJTA · 2026', en: 'WEBSITE BUILD · 2026' }, title: { sr: 'NS Gloss', en: 'NS Gloss' },
+      desc: { sr: 'Premium detailing studio iz Novog Sada. Sajt sa cenovnikom po tipu vozila, galerijom radova i online zakazivanjem.', en: 'A premium detailing studio from Novi Sad. A website with pricing by vehicle type, a gallery of work and online booking.' } }
+  ];
+
+  renderVals() {
+    const lang = this.state.lang;
+    const t = this.copy[lang];
+    const active = { '--lh': 'oklch(0.62 0.09 55)', transition: 'background 0.2s ease,color 0.2s ease', color: '#151210', background: 'oklch(0.62 0.09 55)', border: 'none', borderRadius: '999px', fontSize: '12px', fontWeight: '700', letterSpacing: '0.03em', cursor: 'pointer', fontFamily: 'Sora,sans-serif', padding: '6px 12px' };
+    const inactive = { ...active, '--lh': 'rgba(242,237,230,0.08)', color: '#a89f93', background: 'transparent', fontWeight: '600' };
+    const tools = this.toolsData.map(tl => ({ mono: tl.mono, name: tl.name[lang] }));
+    const filterDefs = [
+      { key: 'all', label: t.filter_all },
+      { key: 'web', label: t.filter_web },
+      { key: 'video', label: t.filter_video, inert: true }
+    ];
+    const filterBase = { padding: '10px 18px', borderRadius: '999px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'Sora,sans-serif', transition: 'background 0.2s ease,border-color 0.2s ease' };
+    const filters = filterDefs.map(f => ({
+      label: f.label,
+      onClick: f.inert ? () => {} : () => this.setState({ filter: f.key }),
+      style: this.state.filter === f.key
+        ? { ...filterBase, '--hb': 'oklch(0.62 0.09 55)', background: 'oklch(0.62 0.09 55)', color: '#151210', border: '1px solid oklch(0.62 0.09 55)' }
+        : { ...filterBase, background: 'transparent', color: '#a89f93', border: '1px solid rgba(242,237,230,0.16)' }
+    }));
+    const visibleFeatured = this.featured
+      .filter(f => f.cat !== 'video') // HIDDEN video
+      .filter(f => this.state.filter === 'all' || f.cat === this.state.filter)
+      .map(f => ({
+        href: f.href, domain: f.domain, label: f.label,
+        imageStyle: f.image ? { height: '214px', flexShrink: 0, backgroundImage: 'url("' + f.image + '")', backgroundSize: 'cover', backgroundPosition: 'top center' } : null, hasImage: !!f.image, noImage: !f.image,
+        isSite: true,
+        siteUrl: 'https://' + f.domain,
+        onCardClick: () => { window.location.href = f.href; },
+        pill: f.cat === 'video' ? t.pill_video : t.pill_web,
+        meta: f.meta[lang], title: f.title[lang], desc: f.desc[lang],
+        linkLabel: lang === 'sr' ? 'Pogledaj projekat' : 'View project'
+      }));
+    const logoHover = this.state.logoHover;
+    const onLogoEnter = () => this.setState({ logoHover: true });
+    const onLogoLeave = () => this.setState({ logoHover: false });
+    const logoCircleStyle = { width: '30px', height: '30px', borderRadius: '50%', background: '#221d18', border: '1px solid ' + (logoHover ? 'oklch(0.62 0.09 55)' : 'rgba(242,237,230,0.16)'), display: 'inline-block', flexShrink: 0, transition: 'border-color 0.2s ease' };
+    const logoTextStyle = { fontWeight: '700', fontSize: '17px', letterSpacing: '0.06em', color: logoHover ? 'oklch(0.62 0.09 55)' : '#f2ede6', transition: 'color 0.2s ease', textDecoration: 'none' };
+
+    const navBase = (isActive) => ({ fontSize: '14px', color: isActive ? 'oklch(0.62 0.09 55)' : '#a89f93', textDecoration: 'none', paddingBottom: '4px', backgroundImage: 'linear-gradient(currentColor,currentColor)', backgroundRepeat: 'no-repeat', backgroundPosition: 'left bottom', backgroundSize: isActive ? '100% 1px' : '0% 1px', transition: 'background-size 0.25s ease, color 0.2s ease' });
+    const navHoverStyle = { backgroundSize: '100% 1px', color: 'oklch(0.62 0.09 55)' };
+    const goHome = (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+    const goAbout = (e) => { e.preventDefault(); const el = document.getElementById('about'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); };
+    const navDefs = [
+      { key: 'home', href: 'index.html', label: t.nav_home, onClick: goHome },
+      { key: 'about', href: '#about', label: t.nav_about, onClick: goAbout },
+      { key: 'video', href: '#', label: t.nav_video, onClick: (e) => e.preventDefault() }, // DISABLED video: href 'Video Editing.dc.html'
+      { key: 'web', href: 'webdizajn.html', label: t.nav_web },
+      { key: 'contact', href: 'kontakt.html', label: t.nav_contact }
+    ];
+    const navItems = navDefs.map((n) => ({ ...n, style: navBase(n.key === this.state.activeNav) }));
+    const stopProp = (e) => e.stopPropagation();
+
+    return {
+      stopProp,
+      onLogoEnter, onLogoLeave, logoCircleStyle, logoTextStyle, navItems, navHoverStyle,
+      t, lang,
+      toSr: () => this.setState({ lang: 'sr' }),
+      toEn: () => this.setState({ lang: 'en' }),
+      srBtnStyle: lang === 'sr' ? active : inactive,
+      enBtnStyle: lang === 'en' ? active : inactive,
+      filters, visibleFeatured, tools
+    };
+  }
+}
+</script>
+</body>
+</html>

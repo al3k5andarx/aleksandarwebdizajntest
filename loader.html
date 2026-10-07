@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aleksandar — Web Dizajn</title>
+<style>
+html,body{margin:0;height:100%;background:#151210;overflow:hidden}
+#ld-root{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#151210;font-family:'Sora',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .4s ease,transform .4s ease}
+#ld-root::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(242,237,230,.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+#ld-root::after{content:"";position:absolute;left:50%;top:50%;width:520px;height:520px;transform:translate(-50%,-50%);background:radial-gradient(circle,oklch(0.62 0.09 55 / .10) 0%,transparent 65%);pointer-events:none}
+#ld-box{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:28px;animation:ld-in .4s ease both}
+@keyframes ld-in{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+#ld-ringwrap{position:relative;width:112px;height:112px;display:flex;align-items:center;justify-content:center}
+#ld-ring{position:absolute;inset:0;transform:rotate(-90deg)}
+#ld-ring circle{fill:none;stroke-width:2.5}
+#ld-ring .tr{stroke:rgba(242,237,230,.08)}
+#ld-ring .pr{stroke:oklch(0.62 0.09 55);stroke-linecap:round;stroke-dasharray:326.73;stroke-dashoffset:326.73;transition:stroke-dashoffset .12s linear}
+#ld-mark{position:relative;width:76px;height:76px;border-radius:50%;background:#221d18;border:1px solid oklch(0.62 0.09 55 / .55);display:flex;align-items:center;justify-content:center;color:oklch(0.62 0.09 55);font-weight:700;font-size:28px;letter-spacing:.02em}
+#ld-mark::before{content:"";position:absolute;inset:-1px;border-radius:50%;box-shadow:0 0 28px 6px oklch(0.62 0.09 55);opacity:.2;animation:ld-breathe 2.6s ease-in-out infinite;pointer-events:none}
+@keyframes ld-breathe{0%,100%{opacity:.2}50%{opacity:.4}}
+#ld-word{display:inline-flex;flex-direction:column;gap:5px;line-height:1;color:#f2ede6;font-weight:700;font-size:18px;letter-spacing:.06em}
+#ld-sub{display:block;font-size:9px;font-weight:600;letter-spacing:0;text-align:justify;text-align-last:justify;color:oklch(0.62 0.09 55)}
+#ld-track{display:none}
+#ld-bar{transform:scaleX(0)}
+#ld-meta{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:-6px}
+#ld-status{font-size:12px;letter-spacing:.04em;color:#a89f93;min-height:1.2em;transition:opacity .25s ease}
+#ld-pct{font-family:'Courier New',monospace;font-size:10px;letter-spacing:.14em;color:oklch(0.62 0.09 55 / .75);min-width:4ch;text-align:center}
+::selection{background:oklch(0.62 0.09 55);color:#151210}
+@media (prefers-reduced-motion:reduce){#ld-mark::before{animation:none;opacity:.3}}
+</style>
+</head>
+<body>
+<div id="ld-root" aria-label="Učitavanje" role="progressbar">
+  <div id="ld-box">
+    <div id="ld-ringwrap">
+      <svg id="ld-ring" viewBox="0 0 112 112" aria-hidden="true"><circle class="tr" cx="56" cy="56" r="52"></circle><circle class="pr" id="ld-prog" cx="56" cy="56" r="52"></circle></svg>
+      <span id="ld-mark">A</span>
+    </div>
+    <span id="ld-word"><span>ALEKSANDAR</span><span id="ld-sub">W E B &#8202;D I Z A J N</span></span>
+    <div id="ld-track"><div id="ld-bar"></div></div>
+    <div id="ld-meta">
+      <div id="ld-status">Učitavanje...</div>
+      <div id="ld-pct">0%</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var C=326.73,prog=document.getElementById('ld-prog'),st=document.getElementById('ld-status'),last='';
+  window.__ldUpdate=function(p){
+    prog.style.strokeDashoffset=(C*(1-p)).toFixed(2);
+    var t=p>=1?'Spremno':p<0.4?'Učitavanje...':p<0.8?'Skoro gotovo...':'Finalni detalji...';
+    if(t!==last){last=t;st.textContent=t;}
+  };
+})();
+</script>
+<script src="loader.js"></script>
+</body>
+</html>
